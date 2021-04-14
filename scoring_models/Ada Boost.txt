@@ -1,0 +1,20 @@
+train time: 13.842478036880493
+
+score: 0.9858028394321136
+
+f1 score: 0.9861710658699958
+
+recall: 0.9991941982272361
+
+precision: 0.9869992040329
+
+Ada Boost Confusion matrix before normalisation
+
+[[1229   49]
+ [   3 3720]]
+
+Ada Boost Normalised confusion matrix
+
+[[9.61658842e-01 3.83411581e-02]
+ [8.05801773e-04 9.99194198e-01]]
+

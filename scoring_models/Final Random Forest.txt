@@ -1,0 +1,20 @@
+train time: 8.18422818183899
+
+score: 0.9904019196160768
+
+f1 score: 0.9872684919998473
+
+recall: 0.9983883964544722
+
+precision: 0.9888268156424581
+
+Final Random Forest Confusion matrix before normalisation
+
+[[1236   42]
+ [   6 3717]]
+
+Final Random Forest Normalised confusion matrix
+
+[[0.96713615 0.03286385]
+ [0.0016116  0.9983884 ]]
+
