@@ -1,0 +1,20 @@
+train time: 0.08292484283447266
+
+score: 0.9652069586082783
+
+f1 score: 0.9524140189360897
+
+recall: 0.9965081923180231
+
+precision: 0.9584086799276673
+
+Decision Tree Confusion matrix before normalisation
+
+[[1117  161]
+ [  13 3710]]
+
+Decision Tree Normalised confusion matrix
+
+[[0.87402191 0.12597809]
+ [0.00349181 0.99650819]]
+

@@ -1,20 +1,20 @@
-train time: 7.892271280288696
+train time: 3.7869350910186768
 
-score: 0.9858028394321136
+score: 0.9852029594081184
 
-f1 score: 0.9810426234112023
+f1 score: 0.980225723647229
 
 recall: 0.9986569970453935
 
-precision: 0.9825581395348837
+precision: 0.9817797729073146
 
 Gradient Boosting Confusion matrix before normalisation
 
-[[1212   66]
+[[1209   69]
  [   5 3718]]
 
 Gradient Boosting Normalised confusion matrix
 
-[[0.94835681 0.05164319]
+[[0.94600939 0.05399061]
  [0.001343   0.998657  ]]
 

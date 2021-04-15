@@ -12,24 +12,9 @@ if __name__ == '__main__':
     X, y = normalize_features()
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=10)
 
-    # RandomForest
-    start_train = time.time()
-    rfc = RandomForestClassifier(max_features=5, n_estimators=110)
-    rfc.fit(X_train, y_train)
-    end_train = time.time()
-    score = rfc.score(X_test, y_test)
-    y_pred = rfc.predict(X_test)
-
-    f1_s, recall, precision = get_scores(y_test, y_pred)
-
-    write_params_to_file('Random Forest', end_train - start_train, score, f1_s, recall, precision)
-
-    confusion_matrix('Random Forest', rfc, X_test, y_test)
-    roc_curve_plot('Random Forest', y_pred, y_test)
-
     # GradientBoosting
     start_train = time.time()
-    gbc = GradientBoostingClassifier(n_estimators=110, learning_rate=1)
+    gbc = GradientBoostingClassifier(n_estimators=110, max_depth=3, max_features=4)
     gbc.fit(X_train, y_train)
     end_train = time.time()
     score = gbc.score(X_test, y_test)
@@ -57,3 +42,18 @@ if __name__ == '__main__':
 
     confusion_matrix('Ada Boost', abc, X_test, y_test)
     roc_curve_plot('Ada Boost', y_pred, y_test)
+
+    # DecisionTree
+    start_train = time.time()
+    dt = DecisionTreeClassifier(max_depth=9, max_features=4)
+    dt.fit(X_train, y_train)
+    end_train = time.time()
+    score = dt.score(X_test, y_test)
+    y_pred = dt.predict(X_test)
+
+    f1_s, recall, precision = get_scores(y_test, y_pred)
+
+    write_params_to_file('Decision Tree', end_train - start_train, score, f1_s, recall, precision)
+
+    confusion_matrix('Decision Tree', dt, X_test, y_test)
+    roc_curve_plot('Decision Tree', y_pred, y_test)

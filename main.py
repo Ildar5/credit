@@ -2,7 +2,7 @@ from sklearn import preprocessing
 from sklearn.metrics import plot_confusion_matrix
 from plot_metric.functions import BinaryClassification
 from filter.feature_selector import FeatureSelector
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import f1_score
 from sklearn.metrics import recall_score
@@ -10,8 +10,8 @@ from sklearn.metrics import precision_score
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-import time
 import os
+import time
 
 
 def get_dataset():
@@ -79,7 +79,7 @@ def confusion_matrix(name, model, x_test, y_test):
         print(title)
         print(disp.confusion_matrix)
 
-    plt.savefig('scoring_models/plot_images/confusion_matrix_{}.png'.format(name))
+    plt.savefig('scoring_models/plot_images/confusion_matrix/confusion_matrix_{}.png'.format(name))
 
 
 def roc_curve_plot(name, y_pred, y_test):
@@ -88,7 +88,7 @@ def roc_curve_plot(name, y_pred, y_test):
     # Figures
     plt.figure(figsize=(10, 10))
     bc.plot_roc_curve()
-    plt.savefig('scoring_models/plot_images/roc_curve_{}.png'.format(name))
+    plt.savefig('scoring_models/plot_images/roc_curve/roc_curve_{}.png'.format(name))
     # plt.show()
 
 
@@ -138,21 +138,21 @@ def get_scores(y_test, y_pred):
 
 
 def best_model():
-    rfc = RandomForestClassifier(max_features=5, n_estimators=110)
-    rfc.fit(X_train, y_train)
-    return rfc
+    dt = DecisionTreeClassifier(max_depth=9, max_features=4)
+    dt.fit(X_train, y_train)
+    return dt
 
 
 if __name__ == '__main__':
 
     X_train, X_test, y_train, y_test = get_train_test_split()
-    # RandomForest after normalisation and tuning
+    # Decision Tree after normalisation and tuning
     start_train = time.time()
-    rfc = best_model()
+    dt = best_model()
     end_train = time.time()
 
-    score = rfc.score(X_test, y_test)
-    y_pred = rfc.predict(X_test)
+    score = dt.score(X_test, y_test)
+    y_pred = dt.predict(X_test)
 
     f1_s, recall, precision = get_scores(y_test, y_pred)
     print('train time: {}'.format(end_train - start_train))
@@ -160,6 +160,6 @@ if __name__ == '__main__':
     print('recall: {}'.format(recall))
     print('precision: {}'.format(precision))
 
-    write_params_to_file('Final Random Forest', end_train - start_train, score, f1_s, recall, precision)
-    confusion_matrix('Final Random Forest', rfc, X_test, y_test)
-    roc_curve_plot('Final Random Forest', y_pred, y_test)
+    write_params_to_file('Final Decision Tree', end_train - start_train, score, f1_s, recall, precision)
+    confusion_matrix('Final Decision Tree', dt, X_test, y_test)
+    roc_curve_plot('Final Decision Tree', y_pred, y_test)
